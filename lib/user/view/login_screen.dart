@@ -19,11 +19,11 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _Title(),
+                const _Title(),
                 const SizedBox(
                   height: 16.0,
                 ),
-                _SubTitle(),
+                const _SubTitle(),
                 Image.asset(
                   'asset/img/misc/logo.png',
                   width: MediaQuery.of(context).size.width / 3 * 2,
