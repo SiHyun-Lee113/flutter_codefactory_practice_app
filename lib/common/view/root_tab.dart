@@ -39,7 +39,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-      title: 'asdfasdf',
+      title: '코드팩토리 딜리버리 앱',
       child: TabBarView(
         physics: NeverScrollableScrollPhysics(),
         controller: controller,

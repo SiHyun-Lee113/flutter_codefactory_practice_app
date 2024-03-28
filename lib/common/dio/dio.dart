@@ -1,6 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_codefactory_practice_app/common/const/data.dart';
+import 'package:flutter_codefactory_practice_app/common/sercure_storage/secure_stroage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+final dioProvider = Provider<Dio>((ref) {
+  final dio = Dio();
+
+  final storage = ref.watch(secureStorageProvider);
+
+  dio.interceptors.add(CustomInterceptor(storage: storage));
+
+  return dio;
+});
 
 class CustomInterceptor extends Interceptor {
   final FlutterSecureStorage storage;
@@ -11,8 +23,7 @@ class CustomInterceptor extends Interceptor {
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    print('[REQ] [${options.method}] ${options.uri}');
-
+    print('[RES] [${options.method}] ${options.uri}');
     if (options.headers['accessToken'] == 'true') {
       options.headers.remove('accessToken');
 
@@ -40,7 +51,7 @@ class CustomInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     print(
-        '[RES] [${response.requestOptions.method}] ${response.requestOptions.uri}');
+        '[REP] [${response.requestOptions.method}] ${response.requestOptions.uri}');
 
     return super.onResponse(response, handler);
   }
@@ -48,15 +59,10 @@ class CustomInterceptor extends Interceptor {
   // 3) 에러가 났을떄
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    // 401 에러가 있을 때
-    // 토큰을 재발급 받는 시도를 하고 토큰이 재발급되면
-    // 다시 새로운 토큰으로 요청을 한다.
-
-    print('[REQ] [${err.requestOptions.method}] ${err.requestOptions.uri}');
+    print('[ERR] [${err.requestOptions.method}] ${err.requestOptions.uri}');
 
     final refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
 
-    // refreshToken이 없으면 에러를 던진다.
     if (refreshToken == null) {
       return handler.reject(err);
     }
@@ -74,17 +80,13 @@ class CustomInterceptor extends Interceptor {
             }));
 
         final accessToken = resp.data['accessToken'];
-
         final options = err.requestOptions;
 
         options.headers.addAll({
           'authorization': 'Bearer $accessToken',
         });
 
-        // 토큰 변경
         await storage.write(key: ACCESS_TOKEN_KEY, value: accessToken);
-
-        // 요청 재전송
         final response = await dio.fetch(options);
 
         return handler.resolve(response);
