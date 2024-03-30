@@ -50,6 +50,8 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
           return;
         }
       }
+
+      //
       final isLoading = state is CursorPaginationLoading;
       final isRefetching = state is CursorPaginationRefetching;
       final isFetchingMore = state is CursorPaginationFetchingMore;
@@ -65,6 +67,7 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
 
       // fetchMore
       // 데이터를 추가로 더 가져오는 상황
+      // CursorPagination -> CursorPaginationFetchingMore
       if (fetchMore) {
         final pState = state as CursorPagination;
 
@@ -89,12 +92,13 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
             data: pState.data,
           );
         }
-        // 나머지 상황
+        // 나머지 상황 : 처음부터 로딩하는 상황
         else {
           state = CursorPaginationLoading();
         }
       }
 
+      // Fatch More 상황 이든 아니등 실행하기 때문에 걱정 ㄴㄴ
       final resp = await repository.paginate(
         params: paginationParams,
       );
@@ -102,13 +106,17 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
       if (state is CursorPaginationFetchingMore) {
         final pState = state as CursorPaginationFetchingMore;
 
+        // 여기서 state 상태는 CursorPagination
         state = resp.copyWith(
           data: [
             ...pState.data,
             ...resp.data,
           ],
         );
-      } else {
+      }
+      // forceRetetch or 첫 데이터 가져오기
+      else {
+        // 여기서 state 상태는 CursorPagination
         state = resp;
       }
     } catch (e) {

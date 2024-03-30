@@ -4,16 +4,6 @@ part 'cursor_pagination_model.g.dart';
 
 abstract class CursorPaginationBase {}
 
-class CursorPaginationError extends CursorPaginationBase {
-  final String message;
-
-  CursorPaginationError({
-    required this.message,
-  });
-}
-
-class CursorPaginationLoading extends CursorPaginationBase {}
-
 @JsonSerializable(
   genericArgumentFactories: true,
 )
@@ -38,6 +28,30 @@ class CursorPagination<T> extends CursorPaginationBase {
       _$CursorPaginationFromJson(json, fromJsonT);
 }
 
+class CursorPaginationRefetching<T> extends CursorPagination<T> {
+  CursorPaginationRefetching({
+    required super.meta,
+    required super.data,
+  });
+}
+
+class CursorPaginationFetchingMore<T> extends CursorPagination<T> {
+  CursorPaginationFetchingMore({
+    required super.meta,
+    required super.data,
+  });
+}
+
+class CursorPaginationError extends CursorPaginationBase {
+  final String message;
+
+  CursorPaginationError({
+    required this.message,
+  });
+}
+
+class CursorPaginationLoading extends CursorPaginationBase {}
+
 @JsonSerializable()
 class CursorPaginationMeta {
   final int count;
@@ -57,18 +71,4 @@ class CursorPaginationMeta {
 
   factory CursorPaginationMeta.fromJson(Map<String, dynamic> json) =>
       _$CursorPaginationMetaFromJson(json);
-}
-
-class CursorPaginationRefetching<T> extends CursorPagination<T> {
-  CursorPaginationRefetching({
-    required super.meta,
-    required super.data,
-  });
-}
-
-class CursorPaginationFetchingMore<T> extends CursorPagination<T> {
-  CursorPaginationFetchingMore({
-    required super.meta,
-    required super.data,
-  });
 }
