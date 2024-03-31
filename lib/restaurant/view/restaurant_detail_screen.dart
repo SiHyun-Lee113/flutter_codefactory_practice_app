@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codefactory_practice_app/common/layout/default_layout.dart';
 import 'package:flutter_codefactory_practice_app/product/component/product_card.dart';
+import 'package:flutter_codefactory_practice_app/rating/component/rating_card.dart';
 import 'package:flutter_codefactory_practice_app/restaurant/component/restaurant_card.dart';
 import 'package:flutter_codefactory_practice_app/restaurant/model/restaurant_detail_model.dart';
 import 'package:flutter_codefactory_practice_app/restaurant/model/restaurant_model.dart';
@@ -53,6 +54,19 @@ class _RestaurantDetailScreenState
               renderProducts(
                 products: state.products,
               ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              sliver: SliverToBoxAdapter(
+                child: RatingCard(
+                  rating: 4,
+                  email: 'test@gmail.com',
+                  images: [],
+                  avatarImage:
+                      AssetImage('asset/img/logo/codefactory_logo.png'),
+                  content: 'sexy',
+                ),
+              ),
+            )
           ],
         ));
   }
