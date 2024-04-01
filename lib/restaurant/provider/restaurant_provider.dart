@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_codefactory_practice_app/common/model/cursor_pagination_model.dart';
 import 'package:flutter_codefactory_practice_app/common/provider/pagination_provider.dart';
 import 'package:flutter_codefactory_practice_app/restaurant/model/restaurant_model.dart';
@@ -12,7 +13,7 @@ final restaurantDetailProvider =
     return null;
   }
 
-  return state.data.firstWhere((element) => element.id == id);
+  return state.data.firstWhereOrNull((element) => element.id == id);
 });
 
 final restaurantProvider =
@@ -45,10 +46,19 @@ class RestaurantStateNotifier
 
     final resp = await repository.getRestaurantDetail(sid: id);
 
-    state = pState.copyWith(
-      data: pState.data
-          .map<RestaurantModel>((e) => e.id == id ? resp : e)
-          .toList(),
-    );
+    if (pState.data.where((e) => e.id == id).isEmpty) {
+      state = pState.copyWith(
+        data: <RestaurantModel>[
+          ...pState.data,
+          resp,
+        ],
+      );
+    } else {
+      state = pState.copyWith(
+        data: pState.data
+            .map<RestaurantModel>((e) => e.id == id ? resp : e)
+            .toList(),
+      );
+    }
   }
 }

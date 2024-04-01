@@ -62,7 +62,7 @@ class _RestaurantDetailScreenState
     }
 
     return DefaultLayout(
-        title: '불타는 떡볶이',
+        title: state.name,
         child: CustomScrollView(
           controller: controller,
           slivers: [
@@ -144,7 +144,7 @@ class _RestaurantDetailScreenState
 
             return Padding(
               padding: const EdgeInsets.only(top: 16.0),
-              child: ProductCard.fromModel(model: model),
+              child: ProductCard.fromRestaurantProductModel(model: model),
             );
           },
           childCount: products.length,
