@@ -12,8 +12,10 @@ import 'package:flutter_codefactory_practice_app/restaurant/model/restaurant_det
 import 'package:flutter_codefactory_practice_app/restaurant/model/restaurant_model.dart';
 import 'package:flutter_codefactory_practice_app/restaurant/provider/restaurant_provider.dart';
 import 'package:flutter_codefactory_practice_app/restaurant/provider/restaurant_rating_provider.dart';
+import 'package:flutter_codefactory_practice_app/restaurant/view/basket_screen.dart';
 import 'package:flutter_codefactory_practice_app/user/provider/basket_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletons/skeletons.dart';
 
 class RestaurantDetailScreen extends ConsumerStatefulWidget {
@@ -70,7 +72,9 @@ class _RestaurantDetailScreenState
     return DefaultLayout(
         title: state.name,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            context.pushNamed(BasketScreen.routeName);
+          },
           backgroundColor: PRIMARY_COLOR,
           child: Badge(
             isLabelVisible: basket.isNotEmpty,
@@ -87,7 +91,10 @@ class _RestaurantDetailScreenState
               ),
             ),
             backgroundColor: Colors.white,
-            child: Icon(Icons.shopping_basket_outlined),
+            child: const Icon(
+              Icons.shopping_basket_outlined,
+              color: Colors.white,
+            ),
           ),
         ),
         child: CustomScrollView(

@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_codefactory_practice_app/common/view/root_tab.dart';
 import 'package:flutter_codefactory_practice_app/common/view/splash_screen.dart';
+import 'package:flutter_codefactory_practice_app/order/view/order_done_screen.dart';
+import 'package:flutter_codefactory_practice_app/restaurant/view/basket_screen.dart';
 import 'package:flutter_codefactory_practice_app/restaurant/view/restaurant_detail_screen.dart';
 import 'package:flutter_codefactory_practice_app/user/model/user_model.dart';
 import 'package:flutter_codefactory_practice_app/user/provider/user_me_provider.dart';
@@ -41,6 +43,16 @@ class AuthProvider extends ChangeNotifier {
                 ),
               ),
             ]),
+        GoRoute(
+          path: '/basket',
+          name: BasketScreen.routeName,
+          builder: (context, state) => BasketScreen(),
+        ),
+        GoRoute(
+          path: '/order_done',
+          name: OrderDoneScreen.routeName,
+          builder: (context, state) => OrderDoneScreen(),
+        ),
         GoRoute(
           path: '/splash',
           name: SplashScreen.routeName,
