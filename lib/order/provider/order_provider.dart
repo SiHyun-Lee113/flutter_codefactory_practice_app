@@ -1,3 +1,5 @@
+import 'package:flutter_codefactory_practice_app/common/model/cursor_pagination_model.dart';
+import 'package:flutter_codefactory_practice_app/common/provider/pagination_provider.dart';
 import 'package:flutter_codefactory_practice_app/order/model/order_model.dart';
 import 'package:flutter_codefactory_practice_app/order/model/post_order_body.dart';
 import 'package:flutter_codefactory_practice_app/order/repository/order_repository.dart';
@@ -6,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 final orderProvider =
-    StateNotifierProvider<OrderStateNotifier, List<OrderModel>>((ref) {
+    StateNotifierProvider<OrderStateNotifier, CursorPaginationBase>((ref) {
   final repository = ref.watch(orderRepositoryProvider);
   return OrderStateNotifier(
     ref: ref,
@@ -14,14 +16,29 @@ final orderProvider =
   );
 });
 
-class OrderStateNotifier extends StateNotifier<List<OrderModel>> {
+class OrderStateNotifier
+    extends PaginationProvider<OrderModel, OrderRepository> {
   final Ref ref;
-  final OrderRepository repository;
 
   OrderStateNotifier({
     required this.ref,
-    required this.repository,
-  }) : super([]);
+    required super.repository,
+  });
+
+  // Future<void> patchBasket() async {
+  //   await repository.patchBasket(
+  //     body: PatchBasketBody(
+  //       basket: state
+  //           .map(
+  //             (e) => PatchBasketBodyBasket(
+  //               productId: e.product.id,
+  //               count: e.count,
+  //             ),
+  //           )
+  //           .toList(),
+  //     ),
+  //   );
+  // }
 
   Future<bool> postOrder() async {
     try {

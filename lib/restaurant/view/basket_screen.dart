@@ -114,8 +114,10 @@ class BasketScreen extends ConsumerWidget {
                       onPressed: () async {
                         final resp =
                             await ref.read(orderProvider.notifier).postOrder();
-
                         if (resp) {
+                          await ref.read(orderProvider.notifier).paginate(
+                                forceRefetch: true,
+                              );
                           context.goNamed(OrderDoneScreen.routeName);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

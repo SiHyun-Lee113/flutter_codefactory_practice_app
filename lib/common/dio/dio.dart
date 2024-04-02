@@ -60,7 +60,6 @@ class CustomInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     print(
         '[REP] [${response.requestOptions.method}] ${response.requestOptions.uri}');
-
     return super.onResponse(response, handler);
   }
 
