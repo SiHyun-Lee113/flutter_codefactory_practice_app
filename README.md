@@ -1,16 +1,11 @@
 # flutter_codefactory_practice_app
 
-A new Flutter project.
+### 배달앱 클론코딩 애플리케이션
+[코드팩토리] [중급] Flutter 진짜 실전! 상태관리, 캐시관리, Code Generation, GoRouter, 인증로직 등 중수가 되기 위한 필수 스킬들!
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 주요 기능
+1. JWT를 활용한 Authentication
+2. Retrofit을 활용한 REST API 매핑
+   2.1 JsonSericalizable, Retrofit, Dio Interceptor
+3. Riverpod를 활용한 상태 관리
+4. Pagination 일반화
