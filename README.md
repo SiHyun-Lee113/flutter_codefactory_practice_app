@@ -9,3 +9,29 @@
    2.1 JsonSericalizable, Retrofit, Dio Interceptor
 3. Riverpod를 활용한 상태 관리
 4. Pagination 일반화
+
+### 폴더 구조
+./
+├── README.md
+├── analysis_options.yaml
+├── android/
+├── asset/
+│   ├── fonts/
+│   ├── img/
+│   ├── rive/
+│   └── svg/
+├── build/
+├── flutter_codefactory_practice_app.iml
+├── ios/
+├── lib/
+│   ├── common/
+│   ├── main.dart
+│   ├── order/
+│   ├── product/
+│   ├── rating/
+│   ├── restaurant/
+│   └── user/
+├── pubspec.lock
+├── pubspec.yaml
+└── test/
+└── widget_test.dart
