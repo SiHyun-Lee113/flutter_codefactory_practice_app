@@ -24,13 +24,44 @@
 ├── flutter_codefactory_practice_app.iml
 ├── ios/
 ├── lib/
-│   ├── common/
 │   ├── main.dart
+│   ├── common/
+│   │   ├── component/
+│   │   ├── const/
+│   │   ├── dio/
+│   │   ├── layout/
+│   │   ├── model/
+│   │   ├── provider/
+│   │   ├── repository/
+│   │   ├── sercure_storage/
+│   │   ├── utils/
+│   │   └── view/
 │   ├── order/
+│   │   ├── component/
+│   │   ├── model/
+│   │   ├── provider/
+│   │   ├── repository/
+│   │   └── view/
 │   ├── product/
+│   │   ├── component/
+│   │   ├── model/
+│   │   ├── provider/
+│   │   ├── repository/
+│   │   └── view/
 │   ├── rating/
+│   │   ├── component/
+│   │   └── model/
 │   ├── restaurant/
+│   │   ├── component/
+│   │   ├── model/
+│   │   ├── provider/
+│   │   ├── repository/
+│   │   └── view/
 │   └── user/
+│       ├── model/
+│       ├── provider/
+│       ├── repository/
+│       └── view/
 ├── pubspec.lock
 ├── pubspec.yaml
 └── test/
