@@ -11,27 +11,28 @@
 4. Pagination 일반화
 
 ### 폴더 구조
-./
+```shell
 ├── README.md
 ├── analysis_options.yaml
 ├── android/
 ├── asset/
-│   ├── fonts/
-│   ├── img/
-│   ├── rive/
-│   └── svg/
+│   ├── fonts/
+│   ├── img/
+│   ├── rive/
+│   └── svg/
 ├── build/
 ├── flutter_codefactory_practice_app.iml
 ├── ios/
 ├── lib/
-│   ├── common/
-│   ├── main.dart
-│   ├── order/
-│   ├── product/
-│   ├── rating/
-│   ├── restaurant/
-│   └── user/
+│   ├── common/
+│   ├── main.dart
+│   ├── order/
+│   ├── product/
+│   ├── rating/
+│   ├── restaurant/
+│   └── user/
 ├── pubspec.lock
 ├── pubspec.yaml
 └── test/
 └── widget_test.dart
+```
